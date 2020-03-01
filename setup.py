@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-from setuptools import setup
+from setuptools import find_packages, setup
 
 from mope.__version__ import __version__
 
@@ -13,7 +13,7 @@ setup(name='python-mope',
       long_description_content_type='text/markdown',
       author='Lemuel Boyce',
       author_email='lemuel@vokality.com',
-      packages=['yamz'],
+      packages=find_packages(exclude=["tests"]),
       url='https://github.com/rhymiz/python-mope',
       include_package_data=True,
       zip_safe=False,
