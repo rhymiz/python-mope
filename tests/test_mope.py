@@ -3,7 +3,7 @@ from unittest import mock
 from unittest.mock import Mock
 
 from mope import Mope
-from mope.models.payment import Currency, PaymentRequest
+from mope.models.payments import Currency, PaymentRequest
 
 mock_payment_request = {
     'id': 'c43f24a3-df4f-43b7-9045-b454529369dc',

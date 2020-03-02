@@ -18,7 +18,7 @@ setup(name='python-mope',
       include_package_data=True,
       zip_safe=False,
       license='MIT',
-      python_requires='>=3.6',
+      python_requires='>=3.6,<3.8',
       install_requires=[
           'requests'
       ],

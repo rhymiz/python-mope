@@ -1,11 +1,12 @@
-from mope.models.payment import CreatePaymentResponse, PaymentRequest
+from mope.models.payments import CreatePaymentResponse, PaymentRequest
 
 
 class ShopResource:
     def __init__(self, client):
         self._client = client
 
-    def create_payment_request(self, amount, description, order_id, currency, redirect_url):
+    def create_payment_request(self, amount: int, description: str,
+                               order_id: str, currency: str, redirect_url: str) -> CreatePaymentResponse:
         endpoint = '%s/shop/payment_request' % self._client.url_base
         response = self._client.call_api('POST', endpoint=endpoint, json={
             'amount': amount,
@@ -17,7 +18,7 @@ class ShopResource:
         response.raise_for_status()
         return CreatePaymentResponse.from_json(response.json())
 
-    def get_payment_request(self, payment_id):
+    def get_payment_request(self, payment_id: str) -> PaymentRequest:
         endpoint = '%s/shop/payment_request/%s' % (self._client.url_base, payment_id)
         response = self._client.call_api('GET', endpoint=endpoint)
         response.raise_for_status()
