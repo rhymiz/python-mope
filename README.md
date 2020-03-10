@@ -25,7 +25,7 @@ mope.shop.get_payment_request(payment_id='123')
 
 *Methods*
 
-##### `shop.created_payment_request`
+##### `shop.create_payment_request`
 
 | Argument   | Type                | Required |
 | ---        |---                  | ---      |
