@@ -38,7 +38,7 @@ class MopeTestCase(unittest.TestCase):
             method='POST',
             params=None,
             headers={
-                'User-Agent': 'Python Mope 0.0.2',
+                'User-Agent': 'Python Mope 0.0.3',
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer None'
             },
@@ -67,7 +67,7 @@ class MopeTestCase(unittest.TestCase):
             method='POST',
             params=None,
             headers={
-                'User-Agent': 'Python Mope 0.0.2',
+                'User-Agent': 'Python Mope 0.0.3',
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer None'
             },
