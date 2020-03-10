@@ -4,7 +4,7 @@
 Client library for Mopé by Hakrinbank
 
 ### Requirements
-- Python >= 3.6,<3.8
+- Python >= 3.7,<3.8
 - requests (currently not sure what the min required version is)
 - Mopé API Tokens
 
