@@ -1,6 +1,6 @@
 ![Python application](https://github.com/rhymiz/python-mope/workflows/Python%20application/badge.svg?branch=master)
 
-# Python Mopé [under development]
+# Python Mopé
 Client library for Mopé by Hakrinbank
 
 ### Requirements
