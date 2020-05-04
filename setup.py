@@ -2,9 +2,14 @@
 from setuptools import find_packages, setup
 
 from mope.__version__ import __version__
+from mope.compat import PYTHON36
 
 with open("README.md", "r") as fh:
     long_description = fh.read()
+
+install_requires = ['requests']
+if PYTHON36:
+    install_requires.append('dataclasses')
 
 setup(name='python-mope',
       version=__version__,
@@ -18,10 +23,8 @@ setup(name='python-mope',
       include_package_data=True,
       zip_safe=False,
       license='MIT',
-      python_requires='>=3.7,<3.8',
-      install_requires=[
-          'requests'
-      ],
+      python_requires='>=3.6,<=3.8',
+      install_requires=install_requires,
       classifiers=[
           "Programming Language :: Python :: 3",
           "Programming Language :: Python :: 3.6",
