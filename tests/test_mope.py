@@ -3,6 +3,7 @@ from unittest import mock
 from unittest.mock import Mock
 
 from mope import Mope
+from mope.__version__ import __version__
 from mope.models.payments import Currency, PaymentRequest
 
 mock_payment_request = {
@@ -38,7 +39,7 @@ class MopeTestCase(unittest.TestCase):
             method='POST',
             params=None,
             headers={
-                'User-Agent': 'Python Mope 0.0.3',
+                'User-Agent': 'Python Mope %s' % __version__,
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer None'
             },
@@ -67,7 +68,7 @@ class MopeTestCase(unittest.TestCase):
             method='POST',
             params=None,
             headers={
-                'User-Agent': 'Python Mope 0.0.3',
+                'User-Agent': 'Python Mope %s' % __version__,
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer None'
             },
