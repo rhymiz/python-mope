@@ -7,9 +7,10 @@ verify_ssl = true
 twine = "*"
 flake8 = "*"
 pytest = "*"
+dataclasses="*"
 
 [packages]
 requests = "*"
 
 [requires]
-python_version = "3.7"
+python_version = "3"
