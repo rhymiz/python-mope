@@ -10,7 +10,7 @@ pytest = "*"
 dataclasses="*"
 
 [packages]
-requests = "==2.23.0"
+requests = "==2.24.0"
 
 [requires]
 python_version = "3"
