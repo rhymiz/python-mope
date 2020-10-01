@@ -4,6 +4,11 @@
 # Python Mopé
 Client library for Mopé by Hakrinbank
 
+### Token acquisition and API Docs
+- [API Docs](https://api.mope.sr/integration/doc)
+- Instructions for [acquiring a token](https://drive.google.com/file/d/10fWqgpl2Ip9JIacl0pwzUDi_HV6WLbCi/view?usp=sharing)
+
+
 ### Requirements
 - Python >= 3.6,<3.8
 - requests (currently not sure what the min required version is)
