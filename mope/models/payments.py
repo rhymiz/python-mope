@@ -21,7 +21,7 @@ class CreatePaymentResponse(BaseModel):
 
     @classmethod
     def from_json(cls, data: Dict[str, Any]):
-        return cls(data['id'], data['url'])
+        return cls(id=data['id'], url=data['url'])
 
 
 @dataclass
@@ -32,7 +32,11 @@ class Currency(BaseModel):
 
     @classmethod
     def from_json(cls, data: Dict[str, str]):
-        return cls(data['name'], data['code'], data['symbol'])
+        return cls(
+            name=data['name'],
+            code=data['code'],
+            symbol=data['symbol'],
+        )
 
 
 @dataclass
@@ -48,6 +52,13 @@ class PaymentRequest(BaseModel):
 
     @classmethod
     def from_json(cls, data: Dict[str, Any]):
-        return cls(data['id'], data['amount'], data['created_at'],
-                   data['description'], data['expires_at'], Currency.from_json(data['currency']),
-                   data['status'], data['meta_data'])
+        return cls(
+            id=data['id'],
+            amount=data['amount'],
+            created_at=data['created_at'],
+            description=data['description'],
+            expires_at=data['expires_at'],
+            currency=Currency.from_json(data['currency']),
+            status=data['status'],
+            meta_data=data['meta_data'],
+        )
