@@ -67,7 +67,7 @@ class MopeTestCase(unittest.TestCase):
                 'redirect_url': 'https://www.sup.com/products/1',
             },
             headers={
-                'User-Agent': 'Python Mope 0.0.5',
+                'User-Agent': 'Python Mope 0.0.6',
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer None',
             }
