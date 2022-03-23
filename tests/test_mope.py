@@ -12,7 +12,6 @@ mock_payment_request = {
     'created_at': '2019-12-02T14:28:14+00:00',
     'description': 'Order for a lot of beer',
     'expires_at': '2019-12-03T14:28:14+00:00',
-
     'currency': {
         'name': 'Surinamese dollar',
         'code': 'SRD',
@@ -27,10 +26,11 @@ class MopeTestCase(unittest.TestCase):
 
     def setUp(self) -> None:
         self.mope = Mope()
+        self.client = getattr(self.mope, '_client')
 
     @mock.patch('requests.request')
     def test_call_api(self, mock_request):
-        self.mope.call_api('POST', 'https://api.mope.sr/api', json={'amount': 1000})
+        self.client.call_api('POST', 'https://api.mope.sr/api', json={'amount': 1000})
 
         mock_request.assert_called_once_with(
             url='https://api.mope.sr/api',
@@ -54,24 +54,23 @@ class MopeTestCase(unittest.TestCase):
             currency='SRD',
             redirect_url='https://www.sup.com/products/1',
         )
-
         mock_request.assert_called_once_with(
-            url='https://api.mope.sr/api/shop/payment_request',
+            method='POST',
+            url='https://api.mope.sr/shop/payment_request',
+            params=None,
             data=None,
             json={
                 'amount': 1000,
                 'order_id': 'test-1',
                 'currency': 'SRD',
                 'description': 'test',
-                'redirect_url': 'https://www.sup.com/products/1'
+                'redirect_url': 'https://www.sup.com/products/1',
             },
-            method='POST',
-            params=None,
             headers={
-                'User-Agent': 'Python Mope %s' % __version__,
+                'User-Agent': 'Python Mope 0.0.5',
                 'Content-Type': 'application/json',
-                'Authorization': 'Bearer None'
-            },
+                'Authorization': 'Bearer None',
+            }
         )
 
     @mock.patch('requests.request')
