@@ -1,0 +1,55 @@
+{
+	"name": "Python 3",
+	"build": {
+		"dockerfile": "Dockerfile",
+		"context": "..",
+		"args": {
+			"VARIANT": "3.10-bullseye",
+			"NODE_VERSION": "lts/*"
+		}
+	},
+	"customizations": {
+		"vscode": {
+			"settings": {
+				"editor.defaultFormatter": "ms-python.black-formatter",
+				"python.defaultInterpreterPath": "/usr/local/bin/python",
+				"python.linting.enabled": true,
+				"python.venvFolders": [
+					"~/.virtualenvs",
+					"~/.local/share/virtualenvs"
+				],
+				"python.terminal.activateEnvInCurrentTerminal": true,
+				"python.terminal.activateEnvironment": true,
+				"python.languageServer": "Pylance",
+				"python.analysis.indexing": true,
+				"python.analysis.completeFunctionParens": true,
+				"python.analysis.autoImportCompletions": true,
+				"python.analysis.inlayHints.variableTypes": false,
+				"python.analysis.typeCheckingMode": "basic",
+				"python.linting.pylintEnabled": false,
+				"vsintellicode.python.completionsEnabled": true,
+				"vsintellicode.sql.completionsEnabled": true,
+				"intellicodeCompletions.language.python": true,
+				"python.envFile": "${workspaceFolder}/.env"
+			},
+			"extensions": [
+				"ms-python.python",
+				"ms-python.vscode-pylance",
+				"ms-python.isort",
+				"ms-python.black-formatter",
+				"GitHub.codespaces",
+				"ms-vscode-remote.remote-containers",
+				"VisualStudioExptTeam.vscodeintellicode",
+				"VisualStudioExptTeam.vscodeintellicode-completions",
+				"VisualStudioExptTeam.intellicode-api-usage-examples"
+			]
+		}
+	},
+	"postCreateCommand": "pipenv install --dev",
+	"waitFor": "postCreateCommand",
+	"remoteUser": "vscode",
+	"features": {
+		"git": "os-provided",
+		"github-cli": "latest"
+	}
+}
