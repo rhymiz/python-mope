@@ -8,6 +8,8 @@ twine = "*"
 flake8 = "*"
 pytest = "*"
 dataclasses="*"
+black = "*"
+mypy = "*"
 
 [packages]
 requests = "==2.23.0"

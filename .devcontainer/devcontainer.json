@@ -25,12 +25,13 @@
 				"python.analysis.completeFunctionParens": true,
 				"python.analysis.autoImportCompletions": true,
 				"python.analysis.inlayHints.variableTypes": false,
-				"python.analysis.typeCheckingMode": "basic",
+				"python.analysis.typeCheckingMode": "strict",
 				"python.linting.pylintEnabled": false,
 				"vsintellicode.python.completionsEnabled": true,
 				"vsintellicode.sql.completionsEnabled": true,
 				"intellicodeCompletions.language.python": true,
-				"python.envFile": "${workspaceFolder}/.env"
+				"python.envFile": "${workspaceFolder}/.env",
+				"python.linting.mypyEnabled": true
 			},
 			"extensions": [
 				"ms-python.python",

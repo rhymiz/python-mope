@@ -1,13 +1,12 @@
-from abc import abstractmethod
+from abc import ABC, abstractmethod
 from dataclasses import asdict, dataclass
 from typing import Any, Dict, List
 
 
-@dataclass
-class BaseModel:
+class BaseModel(ABC):
     @classmethod
     @abstractmethod
-    def from_json(cls, data: Dict[str, Any]):
+    def from_json(cls, data: Dict[str, Any]) -> None:
         pass
 
     def as_dict(self):
@@ -21,7 +20,7 @@ class CreatePaymentResponse(BaseModel):
 
     @classmethod
     def from_json(cls, data: Dict[str, Any]):
-        return cls(id=data['id'], url=data['url'])
+        return cls(id=data["id"], url=data["url"])
 
 
 @dataclass
@@ -33,9 +32,9 @@ class Currency(BaseModel):
     @classmethod
     def from_json(cls, data: Dict[str, str]):
         return cls(
-            name=data['name'],
-            code=data['code'],
-            symbol=data['symbol'],
+            name=data["name"],
+            code=data["code"],
+            symbol=data["symbol"],
         )
 
 
@@ -53,12 +52,12 @@ class PaymentRequest(BaseModel):
     @classmethod
     def from_json(cls, data: Dict[str, Any]):
         return cls(
-            id=data['id'],
-            amount=data['amount'],
-            created_at=data['created_at'],
-            description=data['description'],
-            expires_at=data['expires_at'],
-            currency=Currency.from_json(data['currency']),
-            status=data['status'],
-            meta_data=data['meta_data'],
+            id=data["id"],
+            amount=data["amount"],
+            created_at=data["created_at"],
+            description=data["description"],
+            expires_at=data["expires_at"],
+            currency=Currency.from_json(data["currency"]),
+            status=data["status"],
+            meta_data=data["meta_data"],
         )
