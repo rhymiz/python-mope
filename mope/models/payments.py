@@ -9,7 +9,7 @@ class BaseModel(ABC):
     def from_json(cls, data: Dict[str, Any]) -> None:
         pass
 
-    def as_dict(self):
+    def as_dict(self) -> dict[str, Any]:
         return asdict(self)
 
 
@@ -19,7 +19,7 @@ class CreatePaymentResponse(BaseModel):
     url: str
 
     @classmethod
-    def from_json(cls, data: Dict[str, Any]):
+    def from_json(cls, data: Dict[str, Any]) -> "CreatePaymentResponse":
         return cls(id=data["id"], url=data["url"])
 
 
@@ -30,7 +30,7 @@ class Currency(BaseModel):
     symbol: str
 
     @classmethod
-    def from_json(cls, data: Dict[str, str]):
+    def from_json(cls, data: Dict[str, str]) -> "Currency":
         return cls(
             name=data["name"],
             code=data["code"],
@@ -50,7 +50,7 @@ class PaymentRequest(BaseModel):
     meta_data: List[Dict[str, Any]]
 
     @classmethod
-    def from_json(cls, data: Dict[str, Any]):
+    def from_json(cls, data: Dict[str, Any]) -> "PaymentRequest":
         return cls(
             id=data["id"],
             amount=data["amount"],

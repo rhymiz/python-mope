@@ -9,7 +9,7 @@ _user_agent = "Python Mope %s" % __version__
 
 
 class Client:
-    def __init__(self, token):
+    def __init__(self, token: str) -> None:
         self._token = token
         self._headers = {
             "User-Agent": _user_agent,
@@ -33,7 +33,7 @@ class Client:
 
 
 class Mope:
-    def __init__(self, token=None) -> None:
+    def __init__(self, token: str) -> None:
         self._token = token
         self._headers = {
             "User-Agent": _user_agent,
