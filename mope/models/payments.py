@@ -9,7 +9,7 @@ class BaseModel(ABC):
     def from_json(cls, data: Dict[str, Any]) -> None:
         pass
 
-    def as_dict(self) -> dict[str, Any]:
+    def as_dict(self) -> Dict[str, Any]:
         return asdict(self)
 
 
