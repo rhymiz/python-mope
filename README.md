@@ -1,5 +1,6 @@
 ![build](https://github.com/rhymiz/python-mope/workflows/build/badge.svg)
 [![downloads](https://pepy.tech/badge/python-mope)](https://pepy.tech/project/python-mope)
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
 # Python Mopé
 Client library for Mopé by Hakrinbank
