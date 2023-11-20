@@ -5,14 +5,15 @@ verify_ssl = true
 
 [dev-packages]
 twine = "*"
-flake8 = "*"
 pytest = "*"
-dataclasses="*"
 black = "*"
 mypy = "*"
+setuptools = "*"
+tomli = "*"
+exceptiongroup = "*"
 
 [packages]
-requests = "==2.23.0"
+requests = "*"
 
 [requires]
 python_version = "3"

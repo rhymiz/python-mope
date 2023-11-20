@@ -6,7 +6,7 @@ from mope.__version__ import __version__
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
-install_requires = ["requests>=2.23.0"]
+install_requires = ["requests"]
 
 setup(
     name="python-mope",
@@ -21,15 +21,15 @@ setup(
     include_package_data=True,
     zip_safe=True,
     license="MIT",
-    python_requires=">=3.7,<=3.11",
+    python_requires=">=3.8,<4",
     install_requires=install_requires,
     classifiers=[
         "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
         "Programming Language :: Python :: 3.10",
         "Programming Language :: Python :: 3.11",
+        "Programming Language :: Python :: 3.12",
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
         "Development Status :: 6 - Mature",
