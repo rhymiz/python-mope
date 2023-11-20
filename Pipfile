@@ -10,7 +10,7 @@ black = "*"
 mypy = "*"
 setuptools = "*"
 tomli = "*"
-exceptiongroup = "{version="*", markers="python_version < '3.10'"}"
+exceptiongroup = {version="*", markers="python_version < '3.10'"}
 
 [packages]
 requests = "*"
