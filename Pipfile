@@ -9,6 +9,7 @@ pytest = "*"
 black = "*"
 mypy = "*"
 setuptools = "*"
+tomli = "*"
 
 [packages]
 requests = "*"
