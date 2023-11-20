@@ -34,7 +34,7 @@ class MopeTestCase(unittest.TestCase):
             method="POST",
             params=None,
             headers={
-                "User-Agent": "Python Mope %s" % __version__,
+                "User-Agent": f"Python Mope {__version__}",
                 "Content-Type": "application/json",
                 "Authorization": "Bearer fake-token",
             },
@@ -62,7 +62,7 @@ class MopeTestCase(unittest.TestCase):
                 "redirect_url": "https://www.sup.com/products/1",
             },
             headers={
-                "User-Agent": "Python Mope 0.1.0",
+                "User-Agent": f"Python Mope {__version__}",
                 "Content-Type": "application/json",
                 "Authorization": "Bearer fake-token",
             },
