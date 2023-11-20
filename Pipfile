@@ -9,8 +9,8 @@ pytest = "*"
 black = "*"
 mypy = "*"
 setuptools = "*"
-tomli = {"version"= "*", "markers"= "python_version < '3.10'"}
-exceptiongroup = {"version"= "*", "markers"= "python_version < '3.10'"}
+tomli = {version = "*", markers="python_version < '3.10'"}
+exceptiongroup = {version= "*", markers="python_version < '3.10'"}
 
 [packages]
 requests = "*"
