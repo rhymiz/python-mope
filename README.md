@@ -12,11 +12,10 @@ Client library for Mopé by Hakrinbank
 
 ### Requirements
 - Python >= 3.8,<4
-- requests (currently not sure what the min required version is)
-- Mopé API Tokens
+- Mopé API Token
 
 ### Getting Started
-First, you can install from PyPi by running `pip install python-mope`
+First, install from PyPi by running `pip install python-mope`
 
 Example usage:
 
