@@ -1,8 +1,9 @@
-from mope.models.payments import CreatePaymentResponse, PaymentRequest
+from mope.models.payments import CreatePaymentResponse, CurrencyCode, PaymentRequest
+from mope.transport import ApiTransport
 
 
 class ShopResource:
-    def __init__(self, client) -> None:
+    def __init__(self, client: ApiTransport) -> None:
         self._client = client
 
     def create_payment_request(
@@ -10,7 +11,7 @@ class ShopResource:
         amount: int,
         description: str,
         order_id: str,
-        currency: str,
+        currency: CurrencyCode,
         redirect_url: str,
     ) -> CreatePaymentResponse:
         """
@@ -37,7 +38,7 @@ class ShopResource:
         fetches a payment request given a payment ID
         """
 
-        endpoint = "shop/payment_request/%s" % payment_id
+        endpoint = f"shop/payment_request/{payment_id}"
         response = self._client.call_api("GET", endpoint=endpoint)
         response.raise_for_status()
         return PaymentRequest.from_json(response.json())

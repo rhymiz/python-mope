@@ -1,56 +1,30 @@
 {
-	"name": "Python 3",
-	"build": {
-		"dockerfile": "Dockerfile",
-		"context": "..",
-		"args": {
-			"VARIANT": "3.10-bullseye",
-			"NODE_VERSION": "lts/*"
-		}
-	},
-	"customizations": {
-		"vscode": {
-			"settings": {
-				"editor.defaultFormatter": "ms-python.black-formatter",
-				"python.defaultInterpreterPath": "/usr/local/bin/python",
-				"python.linting.enabled": true,
-				"python.venvFolders": [
-					"~/.virtualenvs",
-					"~/.local/share/virtualenvs"
-				],
-				"python.terminal.activateEnvInCurrentTerminal": true,
-				"python.terminal.activateEnvironment": true,
-				"python.languageServer": "Pylance",
-				"python.analysis.indexing": true,
-				"python.analysis.completeFunctionParens": true,
-				"python.analysis.autoImportCompletions": true,
-				"python.analysis.inlayHints.variableTypes": false,
-				"python.analysis.typeCheckingMode": "strict",
-				"python.linting.pylintEnabled": false,
-				"vsintellicode.python.completionsEnabled": true,
-				"vsintellicode.sql.completionsEnabled": true,
-				"intellicodeCompletions.language.python": true,
-				"python.envFile": "${workspaceFolder}/.env",
-				"python.linting.mypyEnabled": true
-			},
-			"extensions": [
-				"ms-python.python",
-				"ms-python.vscode-pylance",
-				"ms-python.isort",
-				"ms-python.black-formatter",
-				"GitHub.codespaces",
-				"ms-vscode-remote.remote-containers",
-				"VisualStudioExptTeam.vscodeintellicode",
-				"VisualStudioExptTeam.vscodeintellicode-completions",
-				"VisualStudioExptTeam.intellicode-api-usage-examples"
-			]
-		}
-	},
-	"postCreateCommand": "pipenv install --dev",
-	"waitFor": "postCreateCommand",
-	"remoteUser": "vscode",
-	"features": {
-		"git": "os-provided",
-		"github-cli": "latest"
-	}
+    "name": "Python Mopé",
+    "build": {
+        "dockerfile": "Dockerfile",
+        "context": ".."
+    },
+    "customizations": {
+        "vscode": {
+            "settings": {
+                "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python",
+                "[python]": {
+                    "editor.defaultFormatter": "charliermarsh.ruff",
+                    "editor.formatOnSave": true,
+                    "editor.codeActionsOnSave": {
+                        "source.fixAll.ruff": "explicit",
+                        "source.organizeImports.ruff": "explicit"
+                    }
+                }
+            },
+            "extensions": [
+                "ms-python.python",
+                "charliermarsh.ruff",
+                "astral-sh.ty"
+            ]
+        }
+    },
+    "postCreateCommand": "uv sync --locked",
+    "waitFor": "postCreateCommand",
+    "remoteUser": "vscode"
 }

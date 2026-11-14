@@ -1,0 +1,70 @@
+[build-system]
+requires = ["setuptools==84.2.1"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "python-mope"
+dynamic = ["version"]
+description = "A client library for interacting with the Mopé Web Shop API"
+readme = "README.md"
+requires-python = ">=3.11"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{ name = "Lemuel Boyce", email = "lemuel@vokality.com" }]
+dependencies = ["requests>=2.34.2,<3"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Programming Language :: Python :: 3.15",
+    "Operating System :: OS Independent",
+    "Development Status :: 6 - Mature",
+    "Environment :: Web Environment",
+    "Intended Audience :: Developers",
+    "Topic :: Office/Business :: Financial",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+
+[project.urls]
+Homepage = "https://github.com/rhymiz/python-mope"
+
+[dependency-groups]
+dev = [
+    "pytest>=9.2.0",
+    "ruff>=0.17.5",
+    "ty>=0.0.104",
+    "types-requests>=2.33.0.20261030",
+]
+
+[tool.setuptools.dynamic]
+version = { attr = "mope.__version__.__version__" }
+
+[tool.setuptools.packages.find]
+include = ["mope*"]
+
+[tool.setuptools.package-data]
+mope = ["py.typed"]
+
+[tool.ruff]
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F", "I", "UP", "ANN"]
+
+[tool.ty.environment]
+python-version = "3.11"
+
+[tool.ty.analysis]
+strict-generic-narrowing = true
+
+[tool.ty.rules]
+missing-type-argument = "error"
+unsound-assignment = "error"
+unsound-return = "error"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--import-mode=importlib"
