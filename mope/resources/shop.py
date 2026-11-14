@@ -1,3 +1,4 @@
+from mope.errors import raise_for_status
 from mope.models.payments import CreatePaymentResponse, CurrencyCode, PaymentRequest
 from mope.transport import ApiTransport
 
@@ -30,7 +31,7 @@ class ShopResource:
                 "redirect_url": redirect_url,
             },
         )
-        response.raise_for_status()
+        raise_for_status(response)
         return CreatePaymentResponse.from_json(response.json())
 
     def get_payment_request(self, payment_id: str) -> PaymentRequest:
@@ -40,5 +41,5 @@ class ShopResource:
 
         endpoint = f"shop/payment_request/{payment_id}"
         response = self._client.call_api("GET", endpoint=endpoint)
-        response.raise_for_status()
+        raise_for_status(response)
         return PaymentRequest.from_json(response.json())

@@ -26,6 +26,28 @@ mope = Mope(token="test_123")
 mope.shop.get_payment_request(payment_id="123")
 ```
 
+### Timeouts and errors
+
+Requests use a 5-second connect timeout and a 30-second read timeout by default.
+Configure both with `Mope(token="test_123", timeout=(3.0, 15.0))`, or pass a
+single number of seconds to apply to both. `mope.client.Client` accepts the same
+keyword argument. Values must be finite and greater than zero. The read timeout
+limits inactivity between received bytes, not the total duration of a request.
+
+Shop methods raise `mope.errors.MopeAPIError` for HTTP errors. It is a subclass
+of `requests.HTTPError`, so existing handlers keep working. Its `status_code`,
+`code`, `message`, and `data` fields expose the HTTP status and validated Mopé
+error details, such as code `1033` for account limits exceeded. If the error body
+is missing or malformed, `code` and `data` are `None` and `message` retains the
+HTTP error description. The original response and exception cause are preserved.
+
+Connection failures and timeouts remain `requests.RequestException` subclasses.
+Malformed successful responses still raise `TypeError`, `ValueError`, or
+`KeyError`; invalid JSON raises `requests.exceptions.JSONDecodeError`, which is
+also a `ValueError`. Applications should translate these errors at the API call
+boundary and decide which failures are retryable. Requests are not automatically
+retried, including payment creation after a timeout.
+
 ### Development
 
 Install [uv](https://docs.astral.sh/uv/getting-started/installation/), then run:
