@@ -48,6 +48,9 @@ include = ["mope*"]
 [tool.setuptools.package-data]
 mope = ["py.typed"]
 
+[tool.uv]
+cache-keys = [{ file = "pyproject.toml" }, { file = "mope/__version__.py" }]
+
 [tool.ruff]
 target-version = "py311"
 
