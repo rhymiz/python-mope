@@ -2,11 +2,12 @@
 
 from typing import assert_type
 
-from requests import Response
+from requests import HTTPError, Response
 
 from mope import Mope
 from mope.client import Client
-from mope.json import JsonObject
+from mope.errors import MopeAPIError
+from mope.json import JsonObject, JsonValue
 from mope.models.payments import (
     CreatePaymentResponse,
     Currency,
@@ -58,4 +59,21 @@ def check_transport_inputs(
     assert_type(
         transport.call_api("POST", "endpoint", params=query, data=form, json=payload),
         Response,
+    )
+
+
+def check_timeout_and_error_types(error: MopeAPIError, response: Response) -> None:
+    assert_type(Mope("token", timeout=10.0), Mope)
+    assert_type(Mope("token", timeout=(3.0, 15.0)), Mope)
+    assert_type(Client("token", timeout=10), Client)
+    assert_type(Client("token", timeout=(3, 15)), Client)
+    http_error: HTTPError = error
+    assert_type(http_error, MopeAPIError)
+    assert_type(error.status_code, int | None)
+    assert_type(error.code, int | None)
+    assert_type(error.message, str)
+    assert_type(error.data, JsonValue)
+    assert_type(
+        MopeAPIError.from_response(response, fallback_message="HTTP error"),
+        MopeAPIError,
     )

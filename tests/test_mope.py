@@ -31,16 +31,17 @@ class MopeTestCase(unittest.TestCase):
         expected_response = Response()
         mock_request.return_value = expected_response
         response = self.client.call_api(
-            "POST", "https://api.mope.sr/api", json={"amount": 1000}
+            "POST", "shop/payment_request", json={"amount": 1000}
         )
         self.assertIs(response, expected_response)
 
         mock_request.assert_called_once_with(
-            url="https://api.mope.sr/api",
+            url="https://api.mope.sr/api/shop/payment_request",
             json={"amount": 1000},
             data=None,
             method="POST",
             params=None,
+            timeout=(5.0, 30.0),
             headers={
                 "User-Agent": f"Python Mope {__version__}",
                 "Content-Type": "application/json",
@@ -64,9 +65,10 @@ class MopeTestCase(unittest.TestCase):
         self.assertEqual(response.as_dict(), payload)
         mock_request.assert_called_once_with(
             method="POST",
-            url="https://api.mope.sr/shop/payment_request",
+            url="https://api.mope.sr/api/shop/payment_request",
             params=None,
             data=None,
+            timeout=(5.0, 30.0),
             json={
                 "amount": 1000,
                 "order_id": "test-1",
@@ -94,6 +96,12 @@ class MopeTestCase(unittest.TestCase):
         self.assertTrue(isinstance(mock_response.currency, Currency))
 
         self.assertEqual(mock_response.as_dict(), mock_payment_request)
+        self.assertEqual(
+            mock_request.call_args.kwargs["url"],
+            "https://api.mope.sr/api/shop/payment_request/"
+            "c43f24a3-df4f-43b7-9045-b454529369dc",
+        )
+        self.assertEqual(mock_request.call_args.kwargs["timeout"], (5.0, 30.0))
 
     @mock.patch("requests.request")
     def test_invalid_response_is_rejected(self, mock_request: Mock) -> None:
@@ -114,7 +122,10 @@ class MopeTestCase(unittest.TestCase):
 
     @mock.patch("requests.request")
     def test_http_errors_are_raised_before_parsing(self, mock_request: Mock) -> None:
-        mock_request.return_value.raise_for_status.side_effect = HTTPError("Not found")
+        response = Response()
+        response.status_code = 404
+        response._content = b'{"error": {"code": 1002, "message": "Not found"}}'
+        mock_request.return_value = response
 
         with self.assertRaises(HTTPError):
             self.mope.shop.get_payment_request("payment-123")
@@ -122,5 +133,3 @@ class MopeTestCase(unittest.TestCase):
             self.mope.shop.create_payment_request(
                 100, "order", "order-1", "SRD", "https://example.com"
             )
-
-        mock_request.return_value.json.assert_not_called()
