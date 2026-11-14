@@ -54,19 +54,6 @@ string `key` and `value` fields, as defined by the
 
 ### Publishing
 
-The publishing workflow uses [PyPI trusted publishing](https://docs.pypi.org/trusted-publishers/)
-with `uv publish`. Configure a trusted publisher for the `python-mope` PyPI
-project with these values before the first release through this workflow:
-
-- Owner: `rhymiz`
-- Repository: `python-mope`
-- Workflow: `publish.yml`
-- GitHub environment: `pypi`
-
-Create the matching `pypi` environment in the repository's GitHub settings.
-Publishing uses a short-lived identity token and does not require the old
-`PYPI_USERNAME` or `PYPI_PASSWORD` secrets.
-
 To release, update `mope/__version__.py`, run `uv lock`, and commit the changes.
 Publish a GitHub release whose tag is the package version or `v` followed by that
 version. The workflow checks the tag, runs lint, formatting and type checks,
