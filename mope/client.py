@@ -1,11 +1,36 @@
+from collections.abc import Iterable, Mapping, Set
+from typing import IO, Protocol, TypeAlias
 from urllib.parse import urljoin
 
 import requests
 
 from mope.__version__ import __version__
+from mope.json import json_value
 from mope.resources.shop import ShopResource
 
-_user_agent = "Python Mope %s" % __version__
+QueryScalar: TypeAlias = str | bytes | int | float
+QueryValue: TypeAlias = QueryScalar | Iterable[QueryScalar] | None
+
+
+class QueryItems(Protocol):
+    def items(self) -> Set[tuple[QueryScalar, QueryValue]]: ...
+
+
+QueryParams: TypeAlias = (
+    QueryItems | Iterable[tuple[QueryScalar, QueryValue]] | str | bytes
+)
+RequestData: TypeAlias = (
+    Mapping[str, object]
+    | list[tuple[str, object]]
+    | tuple[tuple[str, object], ...]
+    | Iterable[bytes]
+    | IO[str]
+    | IO[bytes]
+    | str
+    | bytes
+)
+
+_user_agent = f"Python Mope {__version__}"
 
 
 class Client:
@@ -14,12 +39,17 @@ class Client:
         self._headers = {
             "User-Agent": _user_agent,
             "Content-Type": "application/json",
-            "Authorization": "Bearer %s" % token,
+            "Authorization": f"Bearer {token}",
         }
         self._base_url = "https://api.mope.sr/api"
 
     def call_api(
-        self, method, endpoint, params=None, data=None, json=None
+        self,
+        method: str,
+        endpoint: str,
+        params: QueryParams | None = None,
+        data: RequestData | None = None,
+        json: object = None,
     ) -> requests.Response:
         url = urljoin(self._base_url, endpoint)
         return requests.request(
@@ -27,7 +57,7 @@ class Client:
             url=url,
             params=params,
             data=data,
-            json=json,
+            json=json_value(json, path="request"),
             headers=self._headers,
         )
 
@@ -38,7 +68,7 @@ class Mope:
         self._headers = {
             "User-Agent": _user_agent,
             "Content-Type": "application/json",
-            "Authorization": "Bearer %s" % token,
+            "Authorization": f"Bearer {token}",
         }
         self.base_url = "https://api.mope.sr/api"
 
